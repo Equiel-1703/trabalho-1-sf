@@ -212,3 +212,25 @@ somaN = Seq
                   (Atrib (Var "num") (Soma (Var "num") (Num 2)))           -- Calcula o próximo número para ser somado
                )
             )
+
+-- Este programa calcula o resto da divisão inteira usando subtrações sucessivas
+
+sigmaMod :: Memoria
+sigmaMod = [("val", 10), ("divisor", 2), ("mod", 0)]
+
+modCalculator = Seq
+         (Atrib (Var "mod") (Var "val"))
+
+         (If (Igual (Var "divisor") (Num 0)) 
+            Skip 
+            
+            (
+               Loop (Var "val")
+                  (
+                     If (Leq (Var "divisor") (Var "mod"))
+                        (Atrib (Var "mod") (Sub (Var "mod") (Var "divisor")))
+
+                        Skip
+                  )
+            )
+         )
